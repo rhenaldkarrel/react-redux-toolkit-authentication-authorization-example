@@ -65,12 +65,12 @@
     "tailwindcss": "^3.2.4"
   },
   "lint-staged": {
-    "src/*/**.{js,ts,tsx}": [
-      "prettier --write",
-      "eslint --fix"
+    "*.{js,ts,tsx}": [
+      "yarn prettier:write",
+      "yarn lint:fix"
     ],
-    "src/*/**.css": [
-      "prettier --write"
+    "*.css": [
+      "yarn prettier:write"
     ]
   }
 }

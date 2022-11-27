@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import type { AxiosResponse } from 'axios';
 
 interface ICredentials {
@@ -9,26 +9,25 @@ interface ICredentials {
 
 type TLogin = Pick<ICredentials, 'password' | 'username'>;
 
-const API_URL = "http://localhost:3000/api/auth/";
+const API_URL = 'http://localhost:3000/api/auth/';
 
 const register = ({ username, email, password }: ICredentials) => {
-  return axios
-    .post(API_URL + "signup", {
-      username,
-      password,
-      email,
-    });
-}
+  return axios.post(API_URL + 'signup', {
+    username,
+    password,
+    email,
+  });
+};
 
 const login = ({ username, password }: TLogin) => {
   return axios
-    .post(API_URL + "signin", {
+    .post(API_URL + 'signin', {
       username,
       password,
     })
     .then((res: AxiosResponse<TLogin>) => {
       if (res.data.username) {
-        localStorage.setItem("user", JSON.stringify(res.data));
+        localStorage.setItem('user', JSON.stringify(res.data));
       }
 
       return res.data;
@@ -36,14 +35,12 @@ const login = ({ username, password }: TLogin) => {
 };
 
 const logout = () => {
-  localStorage.removeItem("user");
-  return axios
-    .post(API_URL + "signout")
-    .then(res => res.data);
+  localStorage.removeItem('user');
+  return axios.post(API_URL + 'signout').then(res => res.data);
 };
 
 const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem("user") ?? "");
+  return JSON.parse(localStorage.getItem('user') ?? '');
 };
 
 const AuthService = {
