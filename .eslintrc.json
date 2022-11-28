@@ -21,6 +21,7 @@
         "@typescript-eslint"
     ],
     "rules": {
-      "no-console": "warn"
+      "no-console": "warn",
+      "react/react-in-jsx-scope": "off"
     }
 }

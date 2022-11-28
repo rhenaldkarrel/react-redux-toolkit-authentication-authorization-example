@@ -3,7 +3,7 @@ import { setMessage } from './message';
 
 import AuthService, { ICredentials, TLogin } from '../services/auth.service';
 
-const user = JSON.parse(localStorage.getItem('user') ?? '');
+const user = JSON.parse(localStorage.getItem('user') || '{}');
 
 export const register = createAsyncThunk(
   'auth/register',
@@ -50,9 +50,10 @@ export const logout = createAsyncThunk('auth/logout', async () => {
   await AuthService.logout();
 });
 
-const initialState = user
-  ? { isLoggedIn: true, user }
-  : { isLoggedIn: false, user: null };
+const initialState =
+  Object.keys(user).length !== 0
+    ? { isLoggedIn: true, user }
+    : { isLoggedIn: false, user: null };
 
 const authSlice = createSlice({
   name: 'auth',
