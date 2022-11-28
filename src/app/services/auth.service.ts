@@ -1,13 +1,13 @@
 import axios from 'axios';
 import type { AxiosResponse } from 'axios';
 
-interface ICredentials {
+export interface ICredentials {
   username: string;
   password: string;
   email: string;
 }
 
-type TLogin = Pick<ICredentials, 'password' | 'username'>;
+export type TLogin = Pick<ICredentials, 'password' | 'username'>;
 
 const API_URL = 'http://localhost:3000/api/auth/';
 
