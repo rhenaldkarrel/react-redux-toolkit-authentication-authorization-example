@@ -2,24 +2,21 @@ import { useState, useEffect } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { Navigate, useNavigate } from 'react-router-dom';
 
-import { login } from 'app/slices/auth';
+import { register } from 'app/slices/auth';
 import { clearMessage } from 'app/slices/message';
-import { TLogin } from 'app/services/auth.service';
+import { ICredentials } from 'app/services/auth.service';
 
-const initialValues: TLogin = {
+const initialValues: ICredentials = {
   username: '',
   password: '',
+  email: '',
 };
 
-export const Login = () => {
-  const navigate = useNavigate();
+export const Register = () => {
+  const [successful, setSuccessful] = useState(false);
+
   const dispatch = useAppDispatch();
-
-  const [loading, setLoading] = useState(false);
-
-  const { isLoggedIn } = useAppSelector(state => state.auth);
   const { message } = useAppSelector(state => state.message);
 
   useEffect(() => {
@@ -27,42 +24,71 @@ export const Login = () => {
   }, [dispatch]);
 
   const validationSchema = Yup.object().shape({
-    username: Yup.string().required('This field is required!'),
-    password: Yup.string().required('This field is required!'),
+    username: Yup.string()
+      .test('len', 'The username must be between 3 and 20 characters.', val => {
+        if (!val || !val.trim().length) return true;
+
+        return val.toString().length >= 3 && val.toString().length <= 20;
+      })
+      .required('This field is required!'),
+    email: Yup.string()
+      .email('This is not a valid email.')
+      .required('This field is required!'),
+    password: Yup.string()
+      .test('len', 'The password must be between 6 and 40 characters.', val => {
+        if (!val || !val.trim().length) return true;
+
+        return val.toString().length >= 6 && val.toString().length <= 40;
+      })
+      .required('This field is required!'),
   });
 
-  const handleLogin = (formValue: TLogin) => {
-    const { username, password } = formValue;
+  const handleRegister = (formValue: ICredentials) => {
+    const { username, password, email } = formValue;
 
-    setLoading(true);
+    setSuccessful(false);
 
-    dispatch(login({ username, password }))
+    dispatch(register({ username, password, email }))
       .unwrap()
       .then(() => {
-        navigate('/profile');
-        window.location.reload();
+        setSuccessful(true);
       })
       .catch(() => {
-        setLoading(false);
+        setSuccessful(false);
       });
   };
-
-  if (isLoggedIn) {
-    return <Navigate to="/profile" />;
-  }
 
   return (
     <div className="grid justify-center items-center h-screen">
       <div className="bg-white md:w-96 p-9 rounded-xl shadow-xl m-4">
-        <h1 className="font-bold mb-4 text-center text-2xl">Login</h1>
+        <h1 className="font-bold mb-4 text-center text-2xl">Register</h1>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={handleLogin}
+          onSubmit={handleRegister}
         >
           {({ errors, touched }) => (
             <Form>
               <form action="" className="grid gap-3">
+                <div className="grid gap-2">
+                  <label htmlFor="email" className="capitalize">
+                    email
+                  </label>
+                  <Field
+                    type="text"
+                    name="email"
+                    id="email"
+                    placeholder="Enter email..."
+                    className={`border-2 rounded-md px-3 py-2 ${
+                      errors.email && touched.email && 'border-red-300'
+                    }`}
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="text-red-500"
+                  />
+                </div>
                 <div className="grid gap-2">
                   <label htmlFor="username" className="capitalize">
                     username
@@ -103,7 +129,7 @@ export const Login = () => {
                 </div>
                 <div className="grid mt-4">
                   <button className="bg-green-400 rounded-md text-white py-2 shadow-lg shadow-green-300">
-                    Login
+                    Register
                   </button>
                 </div>
               </form>
@@ -111,8 +137,8 @@ export const Login = () => {
           )}
         </Formik>
         <div className="mt-8">
-          Didn&apos;t have an account? Register{' '}
-          <a href="/register" className="text-green-400 hover:underline">
+          Have an account? Login{' '}
+          <a href="/" className="text-green-400 hover:underline">
             here
           </a>
           .
@@ -141,4 +167,4 @@ export const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
