@@ -9,7 +9,7 @@ export interface ICredentials {
 
 export type TLogin = Pick<ICredentials, 'password' | 'username'>;
 
-const API_URL = 'http://localhost:3000/api/auth/';
+const API_URL = 'http://localhost:8080/api/auth/';
 
 const register = ({ username, email, password }: ICredentials) => {
   return axios.post(API_URL + 'signup', {
