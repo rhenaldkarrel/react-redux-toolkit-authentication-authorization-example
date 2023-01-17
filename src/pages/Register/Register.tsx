@@ -69,70 +69,68 @@ export const Register = () => {
         >
           {({ errors, touched }) => (
             <Form>
-              <form action="" className="grid gap-3">
-                <div className="grid gap-2">
-                  <label htmlFor="email" className="capitalize">
-                    email
-                  </label>
-                  <Field
-                    type="text"
-                    name="email"
-                    id="email"
-                    placeholder="Enter email..."
-                    className={`border-2 rounded-md px-3 py-2 ${
-                      errors.email && touched.email && 'border-red-300'
-                    }`}
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className="text-red-500"
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <label htmlFor="username" className="capitalize">
-                    username
-                  </label>
-                  <Field
-                    type="text"
-                    name="username"
-                    id="username"
-                    placeholder="Enter username..."
-                    className={`border-2 rounded-md px-3 py-2 ${
-                      errors.username && touched.username && 'border-red-300'
-                    }`}
-                  />
-                  <ErrorMessage
-                    name="username"
-                    component="div"
-                    className="text-red-500"
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <label htmlFor="password" className="capitalize">
-                    password
-                  </label>
-                  <Field
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="Enter password..."
-                    className={`border-2 rounded-md px-3 py-2 ${
-                      errors.password && touched.password && 'border-red-300'
-                    }`}
-                  />
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className="text-red-500"
-                  />
-                </div>
-                <div className="grid mt-4">
-                  <button className="bg-green-400 rounded-md text-white py-2 shadow-lg shadow-green-300">
-                    Register
-                  </button>
-                </div>
-              </form>
+              <div className="grid gap-2">
+                <label htmlFor="email" className="capitalize">
+                  email
+                </label>
+                <Field
+                  type="text"
+                  name="email"
+                  id="email"
+                  placeholder="Enter email..."
+                  className={`border-2 rounded-md px-3 py-2 ${
+                    errors.email && touched.email && 'border-red-300'
+                  }`}
+                />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="text-red-500"
+                />
+              </div>
+              <div className="grid gap-2">
+                <label htmlFor="username" className="capitalize">
+                  username
+                </label>
+                <Field
+                  type="text"
+                  name="username"
+                  id="username"
+                  placeholder="Enter username..."
+                  className={`border-2 rounded-md px-3 py-2 ${
+                    errors.username && touched.username && 'border-red-300'
+                  }`}
+                />
+                <ErrorMessage
+                  name="username"
+                  component="div"
+                  className="text-red-500"
+                />
+              </div>
+              <div className="grid gap-2">
+                <label htmlFor="password" className="capitalize">
+                  password
+                </label>
+                <Field
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="Enter password..."
+                  className={`border-2 rounded-md px-3 py-2 ${
+                    errors.password && touched.password && 'border-red-300'
+                  }`}
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="text-red-500"
+                />
+              </div>
+              <div className="grid mt-4">
+                <button className="bg-green-400 rounded-md text-white py-2 shadow-lg shadow-green-300">
+                  Register
+                </button>
+              </div>
             </Form>
           )}
         </Formik>
