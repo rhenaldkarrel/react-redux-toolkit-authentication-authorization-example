@@ -23,7 +23,7 @@ const BoardAdmin = () => {
   }, []);
 
   return (
-    <div className="container h-screen bg-green-100 grid place-items-center">
+    <div className="h-screen bg-green-100 grid place-items-center">
       <header className="text-3xl font-bold">
         <h3>{content}</h3>
       </header>
