@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, Link } from 'react-router-dom';
 
 import { login } from 'app/slices/auth';
 import { clearMessage } from 'app/slices/message';
@@ -53,7 +53,7 @@ export const Login = () => {
 
   return (
     <div className="grid justify-center items-center h-screen">
-      <div className="bg-white md:w-96 p-9 rounded-xl shadow-xl m-4">
+      <div className="bg-gray-700 md:w-96 p-9 rounded-xl shadow-xl m-4">
         <h1 className="font-bold mb-4 text-center text-2xl">Login</h1>
         <Formik
           initialValues={initialValues}
@@ -71,8 +71,8 @@ export const Login = () => {
                   name="username"
                   id="username"
                   placeholder="Enter username..."
-                  className={`border-2 rounded-md px-3 py-2 ${
-                    errors.username && touched.username && 'border-red-300'
+                  className={`border-2 border-gray-700 rounded-md px-3 py-2 bg-gray-500 ${
+                    errors.username && touched.username && 'border-red-500'
                   }`}
                 />
                 <ErrorMessage
@@ -90,8 +90,8 @@ export const Login = () => {
                   name="password"
                   id="password"
                   placeholder="Enter password..."
-                  className={`border-2 rounded-md px-3 py-2 ${
-                    errors.password && touched.password && 'border-red-300'
+                  className={`border-2 border-gray-700 rounded-md px-3 py-2 bg-gray-500 ${
+                    errors.password && touched.password && 'border-red-500'
                   }`}
                 />
                 <ErrorMessage
@@ -101,7 +101,7 @@ export const Login = () => {
                 />
               </div>
               <div className="grid mt-4">
-                <button className="bg-green-400 rounded-md text-white py-2 shadow-lg shadow-green-300">
+                <button className="bg-green-400 rounded-md text-white py-2">
                   Login
                 </button>
               </div>
@@ -110,9 +110,9 @@ export const Login = () => {
         </Formik>
         <div className="mt-8">
           Didn&apos;t have an account? Register{' '}
-          <a href="/register" className="text-green-400 hover:underline">
+          <Link to="/register" className="text-green-400 hover:underline">
             here
-          </a>
+          </Link>
           .
         </div>
         {message && (

@@ -3,6 +3,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import classnames from 'classnames';
+import { Link } from 'react-router-dom';
 
 import { register } from 'app/slices/auth';
 import { clearMessage } from 'app/slices/message';
@@ -61,7 +62,7 @@ export const Register = () => {
 
   return (
     <div className="grid justify-center items-center h-screen">
-      <div className="bg-white md:w-96 p-9 rounded-xl shadow-xl m-4">
+      <div className="bg-gray-700 md:w-96 p-9 rounded-xl shadow-xl m-4">
         <h1 className="font-bold mb-4 text-center text-2xl">Register</h1>
         <Formik
           initialValues={initialValues}
@@ -79,8 +80,8 @@ export const Register = () => {
                   name="email"
                   id="email"
                   placeholder="Enter email..."
-                  className={`border-2 rounded-md px-3 py-2 ${
-                    errors.email && touched.email && 'border-red-300'
+                  className={`border-2 border-gray-700 bg-gray-500 rounded-md px-3 py-2 ${
+                    errors.email && touched.email && 'border-red-500'
                   }`}
                 />
                 <ErrorMessage
@@ -98,8 +99,8 @@ export const Register = () => {
                   name="username"
                   id="username"
                   placeholder="Enter username..."
-                  className={`border-2 rounded-md px-3 py-2 ${
-                    errors.username && touched.username && 'border-red-300'
+                  className={`border-2 border-gray-700 bg-gray-500 rounded-md px-3 py-2 ${
+                    errors.username && touched.username && 'border-red-500'
                   }`}
                 />
                 <ErrorMessage
@@ -117,8 +118,8 @@ export const Register = () => {
                   name="password"
                   id="password"
                   placeholder="Enter password..."
-                  className={`border-2 rounded-md px-3 py-2 ${
-                    errors.password && touched.password && 'border-red-300'
+                  className={`border-2 border-gray-700 bg-gray-500 rounded-md px-3 py-2 ${
+                    errors.password && touched.password && 'border-red-500'
                   }`}
                 />
                 <ErrorMessage
@@ -128,7 +129,7 @@ export const Register = () => {
                 />
               </div>
               <div className="grid mt-4">
-                <button className="bg-green-400 rounded-md text-white py-2 shadow-lg shadow-green-300">
+                <button className="bg-green-400 rounded-md text-white py-2">
                   Register
                 </button>
               </div>
@@ -137,9 +138,9 @@ export const Register = () => {
         </Formik>
         <div className="mt-8">
           Have an account? Login{' '}
-          <a href="/" className="text-green-400 hover:underline">
+          <Link to="/" className="text-green-400 hover:underline">
             here
-          </a>
+          </Link>
           .
         </div>
         {message && (

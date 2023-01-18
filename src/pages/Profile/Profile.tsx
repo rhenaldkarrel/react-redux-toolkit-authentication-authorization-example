@@ -10,7 +10,7 @@ const Profile = () => {
 
   return (
     <div className="grid justify-center items-center h-screen">
-      <div className="bg-white md:w-96 p-9 rounded-xl shadow-xl m-4">
+      <div className="bg-white md:w-96 p-9 rounded-xl shadow-xl m-4 bg-gray-700">
         <h1>{currentUser.username}</h1>
         <p>ID: {currentUser.id}</p>
         <p>Email: {currentUser.email}</p>
